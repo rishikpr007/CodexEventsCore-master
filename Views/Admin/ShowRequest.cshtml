@@ -1,0 +1,157 @@
+﻿@{
+    Layout = null;
+}
+
+@{
+    UserRequest userRequest = ViewBag.UserRequest;
+    int eventId = ViewBag.EventId;
+    string eventName = ViewBag.EventName;
+    int registrationsOver = ViewBag.RegistrationsOver;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="ISO-8859-1">
+    <style>
+        body {
+            font: 400 15px Lato, sans-serif;
+            line-height: 1.8;
+            color: #818181;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #303030;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+        .navbar {
+            margin-bottom: 0;
+            background-color: #f4511e;
+            z-index: 9999;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+            .navbar li a, .navbar .navbar-brand {
+                color: #fff !important;
+            }
+
+
+        .userdetail {
+            width: 30%;
+        }
+
+        .user-details-table {
+            width: 85%;
+            margin: 0 auto;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 10px 10px 21px #8a8a8a, -10px -10px 21px #ffffff;
+            font-family: Montserrat, sans-serif;
+            padding-top: 40px;
+        }
+
+        .createEventFooter {
+            background-color: #f4511e;
+            letter-spacing: 4px;
+            border-radius: 0;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 16px;
+            width: 100%;
+            align-self: stretch;
+        }
+
+            .createEventFooter a {
+                color: #fff !important;
+                float: center;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+                border: 1px solid #f4511e;
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                align-self: stretch;
+            }
+
+                .createEventFooter a:hover {
+                    color: #f4511e !important;
+                    background-color: #fff !important;
+                }
+
+        .profile-buttons {
+            display: flex;
+            height: 30px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-content: center;
+            align-items: stretch;
+        }
+
+            .profile-buttons a, button {
+                align-self: auto;
+                width: 200px;
+                padding: 20px;
+            }
+    </style>
+    <title>Manage Request</title>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="ShowDashboard">CodeX Events</a>
+        </div>
+    </nav>
+
+
+    <div class="user-details-table">
+        <h2 class="profileheading">Event ID: @eventId</h2>
+        <h2 class="profileheading">Event Name: @eventName</h2>
+        <table class="table">
+            <tr>
+                <td class="userdetail">Request ID</td>
+                <td>@userRequest.RegistrationId</td>
+            </tr>
+            <tr>
+                <td class="userdetail">User ID</td>
+                <td>@userRequest.UserId</td>
+            </tr>
+            <tr>
+                <td class="userdetail">Name</td>
+                <td>@userRequest.UserName</td>
+            </tr>
+            <tr>
+                <td class="userdetail">Request Status</td>
+                <td>@userRequest.Status</td>
+            </tr>
+        </table>
+    </div>
+
+    @if (registrationsOver == 0)
+    {
+        <div class="profile-buttons">
+            <a href="ApproveRequest?requestId=@userRequest.RegistrationId"><button type="button" class="btn btn-success">APPROVE</button></a>
+            <a href="RejectRequest?requestId=@userRequest.RegistrationId"><button type="button" class="btn btn-danger">REJECT</button></a>
+        </div>
+    }
+
+    <div class="createEventFooter navbar-fixed-bottom">
+        <a href="ManageRequests?eventId=@eventId">Back to Pending Requests</a>
+    </div>
+
+</body>
+</html>
